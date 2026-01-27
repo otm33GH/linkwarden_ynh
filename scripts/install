@@ -51,12 +51,10 @@ ynh_script_progression "Installing $app..."
 pushd "$install_dir"
 	ynh_hide_warnings corepack enable
 	ynh_hide_warnings corepack prepare yarn@4.12.0 --activate
-	ynh_hide_warnings npm install next --force
-	ynh_hide_warnings npx playwright install --with-deps chromium
     ynh_hide_warnings yarn install 
-	ynh_hide_warnings yarn build
-	ynh_hide_warnings yarn prisma migrate deploy
-popd
+	ynh_hide_warnings npx playwright install --with-deps chromium
+	ynh_hide_warnings yarn workspace @linkwarden/web build
+	ynh_hide_warnings yarn workspace @linkwarden/server prisma migrate deploypopd
 
 chown -R "$app:$app" "$install_dir"
 
